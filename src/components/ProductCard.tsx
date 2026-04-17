@@ -1,12 +1,11 @@
+import { Check, Plus } from "lucide-react";
+import { useCart } from "../context/cart-context";
 import type ProductType from "../types/ProductType";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardTitle,
-} from "./ui/card";
+import { Card, CardContent, CardFooter, CardTitle } from "./ui/card";
 
 export default function ProductCard(ProductData: ProductType) {
+  const { addToCart, foundInCart } = useCart();
+
   return (
     <Card className="group flex flex-col overflow-hidden rounded-2xl border border-neutral-200 dark:border-neutral-800 transition-colors hover:border-neutral-300 dark:hover:border-neutral-700 pt-0">
       <div className="relative h-48 overflow-hidden bg-neutral-100 dark:bg-neutral-800">
@@ -32,8 +31,26 @@ export default function ProductCard(ProductData: ProductType) {
           <span className="text-sm font-normal text-neutral-400 mr-0.5">$</span>
           {ProductData.Price.toFixed(2)}
         </p>
-        <button className="rounded-xl bg-neutral-900 px-4 py-2 text-sm font-medium text-white transition-opacity hover:opacity-75 dark:bg-white dark:text-neutral-900">
-          Add to cart
+        <button
+          onClick={(_) =>
+            addToCart({
+              ID: ProductData.ID,
+              Name: ProductData.Name,
+              Price: ProductData.Price,
+              ImageURL: ProductData.ImageURL,
+              Quantity: 1,
+            })
+          }
+          className="rounded-xl bg-neutral-900 px-4 py-2 text-sm font-medium text-white transition-opacity hover:opacity-75 dark:bg-white dark:text-neutral-900"
+        >
+          <div className="flex gap-2">
+            {foundInCart(ProductData.ID) ? (
+              <Check className="w-5 h-5" />
+            ) : (
+              <Plus className="w-5 h-5" />
+            )}
+            Add to cart
+          </div>
         </button>
       </CardFooter>
     </Card>

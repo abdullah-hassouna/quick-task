@@ -10,7 +10,10 @@ function ProductsPage() {
   return (
     <div className="App p-2">
       {error && <p style={{ color: "red" }}>{error}</p>}
-      <div id="product-list" className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+      <div
+        id="product-list"
+        className="flex flex-col md:grid grid-cols-3 gap-6"
+      >
         {productData.map((product) => (
           <ProductCard key={product.ID + "-" + product.Name} {...product} />
         ))}

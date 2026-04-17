@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState } from "react";
 import type CartItemType from "../types/CartItemType";
-import { callCartData, updateCartData } from "../libs/callCart";
+import { callCartData, emptyCartData, updateCartData } from "../libs/callCart";
 
 interface CartContextType {
   cartItems: CartItemType[];
@@ -25,17 +25,21 @@ export default function CartContextProvider({
 
   const addToCart = (item: CartItemType) => {
     if (foundInCart(item.ID)) {
-      setCartItems((prev) =>
-        prev.map((cartItem) =>
+      setCartItems((prev) => {
+        const updatedCart = prev.map((cartItem) =>
           cartItem.ID === item.ID
             ? { ...cartItem, Quantity: cartItem.Quantity + 1 }
             : cartItem,
-        ),
-      );
+        );
+        updateCartData(updatedCart);
+        return updatedCart;
+      });
     } else {
-      setCartItems((prev) => [...prev, item]);
+      setCartItems((prev) => {
+        updateCartData([...prev, item]);
+        return [...prev, item];
+      });
     }
-    updateCartData(cartItems);
   };
 
   const removeFromCart = (itemId: number) => {
@@ -54,7 +58,7 @@ export default function CartContextProvider({
 
   const clearCart = () => {
     setCartItems([]);
-    updateCartData(cartItems);
+    emptyCartData();
   };
 
   const getCartCount = () => {

@@ -13,3 +13,6 @@ export function callCartData() {
 export function updateCartData(cartItems: CartItemType[]) {
   localStorage.setItem("cart", JSON.stringify(cartItems));
 }
+export function emptyCartData() {
+  localStorage.setItem("cart", "[]");
+}

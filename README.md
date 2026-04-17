@@ -1,75 +1,107 @@
-# React + TypeScript + Vite
+# 🛒 React Shopping App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive 3-page shopping application built with React and TypeScript.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Pages
 
-## React Compiler
+### 1. Products Page
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+Displays a list of product cards with a simulated API delay and loading state. Each card shows product details and an **Add to Cart** button.
 
-Note: This will impact Vite dev & build performances.
+### 2. Cart Page
 
-## Expanding the ESLint configuration
+Lists all items added to the cart with quantities and a calculated total price. Includes a **Proceed to Checkout** button.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 3. Checkout Page
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Collects delivery information:
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- Phone number
+- Delivery address (dropdown select with address detail preview)
+- Payment details
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+All fields are validated — empty fields show an inline error message. Submitting the form clears the cart.
+
+A persistent **header** is shown on all pages displaying the cart icon with a live item count badge.
+
+---
+
+## Tech Stack
+
+- [React](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
+- [React Hook Form](https://react-hook-form.com/) — form state management
+- [Zod](https://zod.dev/) + [@hookform/resolvers](https://github.com/react-hook-form/resolvers) — schema validation
+- [React Router](https://reactrouter.com/) — client-side routing
+- [Tailwind CSS](https://tailwindcss.com/) — utility-first styling
+- [Lucide React](https://lucide.dev/) — icons
+- [shadcn/ui](https://ui.shadcn.com/) — base UI components
+
+---
+
+## Prerequisites
+
+Make sure you have the following installed:
+
+- [Node.js](https://nodejs.org/) v18 or higher
+- npm v9 or higher (comes with Node.js)
+
+---
+
+## Getting Started
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/your-username/your-repo-name.git
+cd your-repo-name
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2. Install dependencies
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 ```
+
+### 3. Start the development server
+
+```bash
+npm run dev
+```
+
+The app will be available at **http://localhost:5173**
+
+---
+
+## Available Scripts
+
+| Script            | Description                          |
+| ----------------- | ------------------------------------ |
+| `npm run dev`     | Start the development server         |
+| `npm run build`   | Build the app for production         |
+| `npm run preview` | Preview the production build locally |
+| `npm run lint`    | Run ESLint                           |
+
+---
+
+## Project Structure
+
+```
+src/
+├── components/        # Reusable UI components (ProductCard, Header, etc.)
+│   └── ui/            # shadcn/ui base components
+├── context/           # React context (CartContext)
+├── data-sample/       # Static sample data (addresses, products)
+├── pages/             # Page components (Products, Cart, Checkout)
+├── types/             # TypeScript type definitions
+└── main.tsx           # App entry point
+```
+
+---
+
+## Notes
+
+- Product data is loaded with an artificial delay to simulate a real API call.
+- Cart state is managed globally via React Context.
+- All pages are fully responsive across mobile, tablet, and desktop screens.

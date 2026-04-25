@@ -55,7 +55,7 @@ Make sure you have the following installed:
 
 ```bash
 git clone https://github.com/abdullah-hassouna/quick-task.git
-cd your-repo-name
+cd quick-task
 ```
 
 ### 2. Install dependencies

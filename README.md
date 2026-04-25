@@ -54,7 +54,7 @@ Make sure you have the following installed:
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/your-repo-name.git
+git clone https://github.com/abdullah-hassouna/quick-task.git
 cd your-repo-name
 ```
 
